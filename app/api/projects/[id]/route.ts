@@ -12,10 +12,9 @@ async function readJsonPayload(res: Response) {
   }
 }
 
-export async function GET(_: NextRequest, context: { params: Promise<{ id: string }> | { id: string } }) {
+export async function GET(_: NextRequest, context: { params: Promise<{ id: string }> }) {
   try {
-    const resolvedParams = context.params instanceof Promise ? await context.params : context.params;
-    const id = resolvedParams?.id;
+    const { id } = await context.params;
     if (!id) {
       return NextResponse.json({ error: 'Missing project ID' }, { status: 400 });
     }
@@ -39,10 +38,9 @@ export async function GET(_: NextRequest, context: { params: Promise<{ id: strin
   }
 }
 
-export async function PATCH(req: NextRequest, context: { params: Promise<{ id: string }> | { id: string } }) {
+export async function PATCH(req: NextRequest, context: { params: Promise<{ id: string }> }) {
   try {
-    const resolvedParams = context.params instanceof Promise ? await context.params : context.params;
-    const id = resolvedParams?.id;
+    const { id } = await context.params;
     const body = await req.json().catch(() => ({}));
     const upstream = await fetch(`${BACKEND}/api/projects/${encodeURIComponent(id)}`, {
       method: 'PATCH',
@@ -64,10 +62,9 @@ export async function PATCH(req: NextRequest, context: { params: Promise<{ id: s
   }
 }
 
-export async function DELETE(_: NextRequest, context: { params: Promise<{ id: string }> | { id: string } }) {
+export async function DELETE(_: NextRequest, context: { params: Promise<{ id: string }> }) {
   try {
-    const resolvedParams = context.params instanceof Promise ? await context.params : context.params;
-    const id = resolvedParams?.id;
+    const { id } = await context.params;
     const upstream = await fetch(`${BACKEND}/api/projects/${encodeURIComponent(id)}`, { method: 'DELETE' });
 
     if (!upstream.ok) {
