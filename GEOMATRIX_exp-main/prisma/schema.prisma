@@ -1,0 +1,17 @@
+datasource db { provider = "postgresql" url = env("DATABASE_URL") }
+generator client { provider = "prisma-client-js" }
+model User { id String @id @default(cuid()) email String @unique role String name String createdAt DateTime @default(now()) auditLogs AuditLog[] }
+model State { id String @id @default(cuid()) name String @unique districts District[] projects Project[] }
+model District { id String @id @default(cuid()) name String stateId String state State @relation(fields:[stateId],references:[id]) projects Project[] }
+model Project { id String @id @default(cuid()) projectCode String @unique name String stateId String districtId String authority String projectType String description String? latitude Float longitude Float geometry Json? landRequired Float landAcquired Float affectedFamilies Int currentStage String status String createdAt DateTime @default(now()) updatedAt DateTime @updatedAt state State @relation(fields:[stateId],references:[id]) district District @relation(fields:[districtId],references:[id]) predictions RiskPrediction[] recommendations Recommendation[] parcels LandParcel[] alerts Alert[] }
+model LandParcel { id String @id @default(cuid()) parcelCode String @unique projectId String village String area Float ownerCount Int acquisitionStatus String compensationStatus String disputeStatus String riskScore Float geometry Json? project Project @relation(fields:[projectId],references:[id]) }
+model AcquisitionStage { id String @id @default(cuid()) projectId String stage String status String expectedDays Int actualDays Int riskScore Float delayDays Int project Project @relation(fields:[projectId],references:[id]) }
+model CompensationCase { id String @id @default(cuid()) projectId String status String amount Float? daysPending Int project Project @relation(fields:[projectId],references:[id]) }
+model LegalCase { id String @id @default(cuid()) projectId String status String caseType String daysOpen Int project Project @relation(fields:[projectId],references:[id]) }
+model Approval { id String @id @default(cuid()) projectId String authority String status String pendingDays Int project Project @relation(fields:[projectId],references:[id]) }
+model Document { id String @id @default(cuid()) projectId String type String referenceNo String? status String extracted Json? project Project @relation(fields:[projectId],references:[id]) }
+model RiskPrediction { id String @id @default(cuid()) projectId String riskScore Float riskLevel String delayProbability Float predictedDelayDays Int confidence Float stageRisk Json modelVersion String createdAt DateTime @default(now()) project Project @relation(fields:[projectId],references:[id]) factors RiskFactor[] }
+model RiskFactor { id String @id @default(cuid()) predictionId String feature String contribution Float direction String description String? prediction RiskPrediction @relation(fields:[predictionId],references:[id]) }
+model Recommendation { id String @id @default(cuid()) projectId String title String priority String driver String owner String expectedImpact String status String project Project @relation(fields:[projectId],references:[id]) }
+model Alert { id String @id @default(cuid()) projectId String severity String reason String detectedAt DateTime @default(now()) recommendedAction String status String project Project @relation(fields:[projectId],references:[id]) }
+model AuditLog { id String @id @default(cuid()) userId String projectId String action String previousValue Json? newValue Json? timestamp DateTime @default(now()) user User }

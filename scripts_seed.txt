@@ -1,0 +1,1 @@
+Seed strategy: use the deterministic records in lib/data.ts for the browser prototype. For production, map these records into the Prisma schema and PostGIS geometry columns; no private/personal data is included.

@@ -1,0 +1,1 @@
+import {NextResponse} from 'next/server';export async function GET(){return NextResponse.json({data:[['Compensation backlog',31],['Legal dispute',24],['Pending approval',18],['Documentation gap',14],['R&R',9]]})}

@@ -1,0 +1,36 @@
+{
+  "run_id": "0ad11dd9-27eb-4edf-89d6-71f283708b85",
+  "model_version": "randomforest-20260919180554",
+  "algorithm": "RandomForest",
+  "trained_at": "2026-09-19T18:05:54.620388",
+  "n_samples": 10,
+  "n_features": 10,
+  "feature_names": [
+    "land_area_ha",
+    "affected_families",
+    "pending_claims",
+    "legal_cases",
+    "doc_completeness_pct",
+    "approval_pending",
+    "rr_pending",
+    "overdue_milestones",
+    "compensation_pending",
+    "env_clearance_pending"
+  ],
+  "n_unique_classes": 2,
+  "class_counts": {
+    "0": 3,
+    "1": 7
+  },
+  "real_label_source": true,
+  "regression_target_available": true,
+  "precision": 1.0,
+  "recall": 1.0,
+  "f1_score": 1.0,
+  "roc_auc": 1.0,
+  "rmse": 982.1357246060412,
+  "accuracy": 1.0,
+  "clf_path": "C:\\Users\\rohit\\Downloads\\geomatrix-sih2026-prototype.worktrees\\geomatrix-full-update-production-ready\\geomatrix_v2\\ml\\..\\model_artifacts\\clf_0ad11dd9-27eb-4edf-89d6-71f283708b85.pkl",
+  "reg_path": "C:\\Users\\rohit\\Downloads\\geomatrix-sih2026-prototype.worktrees\\geomatrix-full-update-production-ready\\geomatrix_v2\\ml\\..\\model_artifacts\\reg_0ad11dd9-27eb-4edf-89d6-71f283708b85.pkl",
+  "scaler_path": "C:\\Users\\rohit\\Downloads\\geomatrix-sih2026-prototype.worktrees\\geomatrix-full-update-production-ready\\geomatrix_v2\\ml\\..\\model_artifacts\\scaler_0ad11dd9-27eb-4edf-89d6-71f283708b85.pkl"
+}

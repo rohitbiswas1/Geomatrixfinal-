@@ -1,0 +1,27 @@
+TB Information Summary
+
+Project: Geomatrix
+Date: 2026-09-20
+
+This file contains the key technical brief and status information for the TB/model review.
+
+1. Model integrity policy
+- Use only real labeled data.
+- Reject synthetic or test-class records.
+- Require a valid two-class dataset before training.
+- Do not fabricate delay-day predictions without a verified regression target.
+
+2. Current status
+- Prediction output is only trusted when a real trained model is available.
+- When no valid model exists, the app must display:
+  Model not trained - insufficient real labeled data.
+- Confidence must remain within the valid range 0.0 to 1.0.
+
+3. Verification
+- Project root pytest checks were run successfully.
+- The app is configured to stay honest under uncertainty instead of inventing metrics.
+
+4. Notes
+- Gemini is an explanation/recommendation layer only.
+- UI/UX was preserved without redesign.
+- No hardcoded or fake predictions were introduced.
